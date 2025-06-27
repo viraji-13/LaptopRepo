@@ -28,7 +28,11 @@ public class Controller {
 	@Autowired
 	SeriveImpl si;
 	
-	
+	@GetMapping("/welcome")
+	public String welcome(){
+		return "welcome to Laptop service"; 
+	}
+
 	@GetMapping("/")
 	public ResponseEntity<List<Laptop>> getAllLaptop(){
 		return new ResponseEntity<List<Laptop>>(si.getAllLaptop(), HttpStatus.OK);
