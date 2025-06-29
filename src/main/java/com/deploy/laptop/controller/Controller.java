@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.deploy.laptop.service.SeriveImpl;
 import jakarta.validation.Valid;
 
 @RestController
+@CrossOrigin("*")
 public class Controller {
 
 	@Autowired
@@ -50,7 +52,7 @@ public class Controller {
 	}
 	
 	@PutMapping("/update/{id}")
-	@CachePut(value = "laptops" , key ="id" )
+	@CachePut(value = "laptops" , key ="#id")
 	public ResponseEntity<Laptop> update(@PathVariable int id , @Valid @RequestBody LaptopDto ldto){
 		return new ResponseEntity<Laptop>(si.updateLaptop(ldto, id), HttpStatus.OK);	
 	} 
